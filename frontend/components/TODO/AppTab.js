@@ -1,5 +1,6 @@
 import React from "react";
 import TabManager from "./TabManager";
+import loading from "../../assets/loading.gif";
 // import { tabs, data, tabsData } from "./tabsData";
 
 // const tabs = [
@@ -20,6 +21,7 @@ class AppTab extends React.Component {
     this.state = {
       tabs: [],
       data: [],
+      // isLoading: true,
     };
   }
 
@@ -104,6 +106,12 @@ class AppTab extends React.Component {
     await this.FetchTodoData();
   };
 
+  // ToggleLoading = (state) => {
+  //   this.setState({
+  //     isLoading: state,
+  //   });
+  // };
+
   componentDidMount() {
     console.log("componentDidMount");
 
@@ -114,8 +122,8 @@ class AppTab extends React.Component {
     console.log("render in AppTab");
 
     return (
-      <div className="body">
-        <h1>TabManager</h1>;
+      <div>
+        <h1>TabManager</h1>
         <TabManager
           // tabsData={this.state.tabsData}
           tabs={this.state.tabs}
@@ -124,6 +132,7 @@ class AppTab extends React.Component {
           AddTodoData={this.AddTodoData}
           FetchTodoData={this.FetchTodoData}
           UpdateTodoData={this.UpdateTodoData}
+
           // tabList={tabList}
           // contentList={contentList}
         />

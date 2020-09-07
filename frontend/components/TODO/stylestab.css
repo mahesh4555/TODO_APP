@@ -55,7 +55,97 @@
 body {
   /* background-image: url("https://images.unsplash.com/photo-1524862655266-89c67a10c4b3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"); */
   /* background-color: #cccccc; */
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRT-AtG5G1nnYhzLkjr5ooPEtP_PupmEa9BzA&usqp=CAU");
+  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRT-AtG5G1nnYhzLkjr5ooPEtP_PupmEa9BzA&usqp=CAU"); */
+  /* background-image: url("https://img.freepik.com/free-vector/hand-drawn-people-dancing-background_23-2148116971.jpg?size=626&ext=jpg"); */
+  /* background-image: url("https://image.freepik.com/free-vector/cricket-background_1302-17307.jpg"); */
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRhdAlI7PqRFZmsZ6tAI_7DLz3c2WkcfrrAtQ&usqp=CAU");
+  width: "1500";
+  /* height: "1600"; */
+  background-repeat: no-repeat;
+  /* /* background-repeat: no-repeat; */
+  background-attachment: fixed;
+  background-size: cover;
+  /* background-color: "pink"; */
+}
+
+.bodydown {
+  /* background-image: url("https://images.unsplash.com/photo-1524862655266-89c67a10c4b3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"); */
+  /* background-color: #cccccc; */
+  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRT-AtG5G1nnYhzLkjr5ooPEtP_PupmEa9BzA&usqp=CAU"); */
+  /* background-image: url("https://img.freepik.com/free-vector/hand-drawn-people-dancing-background_23-2148116971.jpg?size=626&ext=jpg"); */
+  /* background-image: url("https://image.freepik.com/free-vector/cricket-background_1302-17307.jpg"); */
+  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRhdAlI7PqRFZmsZ6tAI_7DLz3c2WkcfrrAtQ&usqp=CAU"); */
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTswgLi76qiZ6s-_GwwADxnq9JDkR3yVcaaLQ&usqp=CAU&reload=on");
+  width: "1500";
+  /* height: "1600"; */
+  background-repeat: no-repeat;
+  /* /* background-repeat: no-repeat; */
+  background-attachment: fixed;
+  background-size: cover;
+  /* background-color: "pink"; */
 }
 
 /* https://www.google.com/imgres?imgurl=https%3A%2F%2Fpng.pngtree.com%2Fthumb_back%2Ffw800%2Fback_our%2F20190617%2Fourmid%2Fpngtree-blue-ink-large-size-background-image_124631.jpg&imgrefurl=https%3A%2F%2Fpngtree.com%2Ffreebackground%2Fblue-ink-large-size-background_1109089.html&tbnid=GJuUi_D2IchcLM&vet=12ahUKEwjI2P_73c_rAhV2nksFHR-HCZcQMygBegUIARDXAQ..i&docid=LAG0eV85XPyavM&w=960&h=400&q=background%20images%20with%20large%20size&ved=2ahUKEwjI2P_73c_rAhV2nksFHR-HCZcQMygBegUIARDXAQ */
+
+.button {
+  background-color: #063d7071; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.tabbutton {
+  border: none;
+
+  padding: 20px 125px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 14px 2px;
+  cursor: pointer;
+}
+
+.tabbutton button:hover {
+  background-color: rgb(170, 61, 61);
+}
+
+.inputfield {
+  padding: 10px 10px;
+  background-color: #d1d1d1;
+  /* box-sizing: border-box; */
+  border: 3px solid lightslategray;
+  /* border: 10px rgb(119, 14, 14); */
+  border-radius: 10px;
+}
+
+.pair {
+  display: block;
+  padding: 5px;
+  clear: right;
+  width: 100%;
+  border-radius: 5px;
+  border: 5px solid #8394a5;
+  /* background: orange; */
+}
+
+.hero-image {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../assets/loading.gif");
+
+  /* Set a specific height */
+  height: 50%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}

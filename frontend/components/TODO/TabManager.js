@@ -1,6 +1,10 @@
 import React from "react";
 import ContentManager from "./ContentManager";
 // import tabsData from "./tabsData";
+
+import TabButton from "./sub_components/TabButton";
+import ContentArea from "./sub_components/ContentArea";
+
 import "./stylestab.css";
 let arr = [];
 class TabManager extends React.Component {
@@ -22,10 +26,15 @@ class TabManager extends React.Component {
 
     this.setState({
       activeTab: name,
+      isTodoPressed: false,
     });
     this.dispData(name);
   };
   handleTaskStatusChange = async (event) => {
+    this.setState({
+      isTodoPressed: false,
+    });
+
     console.log("handleTaskStatusChange");
     const { name, id, value } = event.target;
     console.log("name:", name);
@@ -72,17 +81,14 @@ class TabManager extends React.Component {
       // let style2={ color: "none"  }
 
       return (
-        <button
-          // style={{ color: active ? "blue" : "none" }}
-          style={style}
+        <TabButton
           key={tab._id}
-          id={tab._id}
-          name={tab.state}
-          onClick={this.handleTabChange}
-        >
-          {tab.label}
-        </button>
+          style={style}
+          tab={tab}
+          handleTabChange={this.handleTabChange}
+        />
       );
+      // this.props.ToggleLoading(false);
     });
 
     console.log("contentList");
@@ -96,35 +102,20 @@ class TabManager extends React.Component {
 
       console.log("active :", active);
       return (
-        <div
-          style={{
-            display: active ? "block" : "none",
-            padding: "6px 12px",
-            border: "1px solid #ccc",
-            borderTop: "none",
-          }}
+        <ContentArea
           key={data._id}
-          id={data._id}
-        >
-          <b>{data.name}</b>
-          <p>{data.content}</p>
-          <select
-            name="state"
-            id={data._id}
-            onChange={this.handleTaskStatusChange}
-          >
-            {/* <option value="1">Todo</option>
-            <option value="2">Inprogress</option>
-            <option value="3">Completed</option> */}
-            {this.state.dropDownSelect}
-          </select>
-        </div>
+          active={active}
+          data={data}
+          handleTaskStatusChange={this.handleTaskStatusChange}
+          dropDownSelect={this.state.dropDownSelect}
+        />
       );
     });
 
     this.setState({
       tabList: tabList,
       contentList: contentList,
+      isTodoPressed: true,
     });
   };
 
@@ -144,42 +135,66 @@ class TabManager extends React.Component {
   handleAddTodoButtonClick = async (event) => {
     console.log("calling handleAddTodoButtonClick");
     let new_task_header = document.getElementById("new_task_header").value;
-    let new_task_text = document.getElementById("new_task_text").value;
+    // let new_task_text = document.getElementById("new_task_text").value;
+
+    let new_task_textarea = document.getElementById("new_task_textarea").value;
     let new_task_state = parseInt(
       document.getElementById("new_task_state").value
     );
-    console.log("new_task_header :", new_task_header);
-    console.log("new_task_text :", new_task_text);
-    console.log("new_task_state :", new_task_state);
 
-    let data = {
-      name: new_task_header,
-      content: new_task_text,
-      currentState: new_task_state,
-    };
-    await this.props.AddTodoData(data);
-    //I got the response data   after adding to the serverand saved to this.state.data
-    //So commenting the below function
-    // await this.props.FetchTodoData();
-    await this.dispData(1);
+    if (new_task_header.trim() == "" || new_task_textarea.trim() == "") {
+      if (new_task_header.trim() == "" && new_task_textarea.trim() == "")
+        alert("Please enter taskname and description ");
+      else if (new_task_header.trim() == "") alert("Please enter taskname");
+      else if (new_task_textarea.trim() == "")
+        alert("Please enter description");
+    } else {
+      document.getElementById("new_task_header").value = "";
+      document.getElementById("new_task_textarea").value = "";
+      this.setState({
+        isTodoPressed: true,
+      });
+
+      console.log("new_task_header :", new_task_header);
+      // console.log("new_task_text :", new_task_text);
+      console.log("new_task_state :", new_task_state);
+      console.log("new_task_textarea :", new_task_textarea);
+
+      let data = {
+        name: new_task_header,
+        content: new_task_textarea,
+        currentState: new_task_state,
+      };
+      await this.props.AddTodoData(data);
+      //I got the response data   after adding to the serverand saved to this.state.data
+      //So commenting the below function
+      // await this.props.FetchTodoData();
+      await this.dispData(1);
+    }
   };
 
   //both using Promise and async await are similar, refer to S44 code
   async componentDidMount() {
+    console.log("TabManageer componentDidMount");
     await this.props.FetchTodoTabsAndData();
     await this.taskStatusDropDownOptionsSet();
     await this.dispData(1);
     this.setState({
       isTodoPressed: true,
     });
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 3000);
   }
 
   render() {
+    // this.props.ToggleLoading(false);
     return (
       <ContentManager
         FetchInitialState={this.FetchInitialState}
         handleAddTodoButtonClick={this.handleAddTodoButtonClick}
         tabManagerState={this.state}
+        // Toggleloading={this.props.Toggleloading}
       />
     );
   }
