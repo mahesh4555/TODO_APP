@@ -98,8 +98,8 @@ class AppTab extends React.Component {
     await console.log("Response added to state.data ");
   };
 
-  HandleButtonClick = async () => {
-    console.log("calling HandleButtonClick");
+  FetchTodoTabsAndData = async () => {
+    console.log("calling FetchTodoTabsAndData");
     await this.FetchTodoTabs();
     await this.FetchTodoData();
   };
@@ -109,18 +109,6 @@ class AppTab extends React.Component {
 
     // this.FetchTodoTabs();
   }
-
-  // componentWillUpdate() {
-  //   console.log("componentDidMount");
-  //   fetch("http://192.168.43.216/todo/tabs")
-  //     .then((response) => response.json())
-  //     .then((tabs) => {
-  //       console.log("TABS");
-  //       console.log(tabs);
-  //       this.setState({ tabs: tabs });
-  //     });
-  //   this.FetchTodoContent();
-  // }
 
   render() {
     console.log("render in AppTab");
@@ -132,7 +120,7 @@ class AppTab extends React.Component {
           // tabsData={this.state.tabsData}
           tabs={this.state.tabs}
           data={this.state.data}
-          HandleButtonClick={this.HandleButtonClick}
+          FetchTodoTabsAndData={this.FetchTodoTabsAndData}
           AddTodoData={this.AddTodoData}
           FetchTodoData={this.FetchTodoData}
           UpdateTodoData={this.UpdateTodoData}

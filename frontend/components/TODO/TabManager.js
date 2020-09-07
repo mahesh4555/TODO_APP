@@ -16,7 +16,7 @@ class TabManager extends React.Component {
     };
   }
 
-  handleTab = (event) => {
+  handleTabChange = (event) => {
     console.log("Tab clicked:", event.target.name);
     const { id, name } = event.target;
 
@@ -25,8 +25,8 @@ class TabManager extends React.Component {
     });
     this.dispData(name);
   };
-  handleSelectChange = async (event) => {
-    console.log("handleSelectChange");
+  handleTaskStatusChange = async (event) => {
+    console.log("handleTaskStatusChange");
     const { name, id, value } = event.target;
     console.log("name:", name);
     console.log("id:", id);
@@ -43,11 +43,7 @@ class TabManager extends React.Component {
     await this.dispData(this.state.activeTab);
   };
 
-  labelCollect = (tabs) => {
-    arr.push(tabs.label);
-  };
-
-  dropDownOptionsSet = () => {
+  taskStatusDropDownOptionsSet = () => {
     const dropDownSelect = this.props.tabs.map((tab) => {
       return <option value={tab.state}>{tab.label}</option>;
     });
@@ -82,7 +78,7 @@ class TabManager extends React.Component {
           key={tab._id}
           id={tab._id}
           name={tab.state}
-          onClick={this.handleTab}
+          onClick={this.handleTabChange}
         >
           {tab.label}
         </button>
@@ -112,7 +108,11 @@ class TabManager extends React.Component {
         >
           <b>{data.name}</b>
           <p>{data.content}</p>
-          <select name="state" id={data._id} onChange={this.handleSelectChange}>
+          <select
+            name="state"
+            id={data._id}
+            onChange={this.handleTaskStatusChange}
+          >
             {/* <option value="1">Todo</option>
             <option value="2">Inprogress</option>
             <option value="3">Completed</option> */}
@@ -128,21 +128,21 @@ class TabManager extends React.Component {
     });
   };
 
-  HandleWelcomButton = async () => {
-    console.log("calling HandleWelcomButton");
-    this.setState({
-      isTodoPressed: false,
-    });
+  // FetchInitialState = async () => {
+  //   console.log("calling FetchInitialState");
+  //   this.setState({
+  //     isTodoPressed: false,
+  //   });
 
-    await this.props.HandleButtonClick();
-    await this.dispData(1);
-    this.setState({
-      isTodoPressed: true,
-    });
-  };
+  //   await this.props.FetchTodoTabsAndData();
+  //   await this.dispData(1);
+  //   this.setState({
+  //     isTodoPressed: true,
+  //   });
+  // };
 
-  handleAddTodoButton = async (event) => {
-    console.log("calling handleAddTodoButton");
+  handleAddTodoButtonClick = async (event) => {
+    console.log("calling handleAddTodoButtonClick");
     let new_task_header = document.getElementById("new_task_header").value;
     let new_task_text = document.getElementById("new_task_text").value;
     let new_task_state = parseInt(
@@ -166,100 +166,85 @@ class TabManager extends React.Component {
 
   //both using Promise and async await are similar, refer to S44 code
   async componentDidMount() {
-    await this.props.HandleButtonClick();
-    await this.dropDownOptionsSet();
+    await this.props.FetchTodoTabsAndData();
+    await this.taskStatusDropDownOptionsSet();
     await this.dispData(1);
     this.setState({
       isTodoPressed: true,
     });
   }
-  // componentDidUpdate() {
-  //   this.dispData();
-  // }
-  // componentWillUpdate() {
-  //   this.dispData();
-  // }
 
   render() {
-    console.log(this.state.activeTab);
-    // console.log("Calling dispData");
-
     return (
-      <div>
-        <br />
-        <button onClick={this.HandleWelcomButton}>
-          Press Me to Todo Tasks
-        </button>
-        {/* <Button as="input" type="button" value="Input" /> */}
-        <br />
-        <br />
-
-        <div
-          style={{
-            display: this.state.isTodoPressed ? "block" : "none",
-          }}
-        >
-          <label>
-            <label htmlFor="taskname">Task name </label>
-            <input type="text" id="new_task_header" name="new_task_header" />
-
-            <br style={{ lineHeight: "10" }} />
-            <label htmlFor="taskcontent">Description </label>
-            <input type="text" id="new_task_text" name="new_task_text" />
-            <br />
-            <select id="new_task_state" name="new_task_state">
-              <option value="1">Todo</option>
-              <option value="2">Inprogress</option>
-              <option value="3">Completed</option>
-            </select>
-            <br />
-
-            <br />
-
-            <button id="new_task" onClick={this.handleAddTodoButton}>
-              Add Todo
-            </button>
-            <br />
-            <br />
-            <br />
-
-            {/* <input type="button" id="new_task"> */}
-          </label>
-
-          <div className="tabs">{this.state.tabList}</div>
-          {this.state.contentList}
-          <br />
-          <br />
-          <br />
-          {/* <p>Hello</p>
-          <label for="labels"><p>Hello</p></label>
-          <select name="currentState" id="label" onChange>
-            <option value="Todo">Todo</option>
-            <option value="Inprogress">Inprogress</option>
-            <option value="Completed">Completed</option>
-          </select> */}
-          {/* <div>
-          <h2>Content managers</h2>
-          <h2>Content managers</h2>
-        </div>
-        <h2>Content managers</h2> */}
-          {/* <p></p> */}
-          {/* <ul id="parent">
-            <li>Box #1</li>
-            <li>Box #2</li>
-            <li>Box #3</li>
-          </ul> */}
-        </div>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
+      <ContentManager
+        FetchInitialState={this.FetchInitialState}
+        handleAddTodoButtonClick={this.handleAddTodoButtonClick}
+        tabManagerState={this.state}
+      />
     );
   }
 }
 
 export default TabManager;
+
+//   render() {
+//     console.log(this.state.activeTab);
+//     // console.log("Calling dispData");
+
+//     return (
+//       <div>
+//         <br />
+//         {/* <button onClick={this.FetchInitialState}>Press Me to Todo Tasks</button> */}
+
+//         <br />
+//         <br />
+
+//         <div
+//           style={{
+//             display: this.state.isTodoPressed ? "block" : "none",
+//           }}
+//         >
+//           <label>
+//             <label htmlFor="taskname">Task name </label>
+//             <input type="text" id="new_task_header" name="new_task_header" />
+
+//             <br style={{ lineHeight: "10" }} />
+//             <label htmlFor="taskcontent">Description </label>
+//             <input type="text" id="new_task_text" name="new_task_text" />
+//             <br />
+//             <select id="new_task_state" name="new_task_state">
+//               <option value="1">Todo</option>
+//               <option value="2">Inprogress</option>
+//               <option value="3">Completed</option>
+//             </select>
+//             <br />
+
+//             <br />
+
+//             <button id="new_task" onClick={this.handleAddTodoButtonClick}>
+//               Add Todo
+//             </button>
+//             <br />
+//             <br />
+//             <br />
+
+//             {/* <input type="button" id="new_task"> */}
+//           </label>
+
+//           <div className="tabs">{this.state.tabList}</div>
+//           {this.state.contentList}
+//           <br />
+//           <br />
+//           <br />
+//         </div>
+
+//         <br />
+//         <br />
+//         <br />
+//         <br />
+//         <br />
+//         <br />
+//       </div>
+//     );
+//   }
+// }
