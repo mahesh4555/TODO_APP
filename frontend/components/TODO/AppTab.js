@@ -1,5 +1,6 @@
 import React from "react";
 import TabManager from "./TabManager";
+import Header from "./sub_components/Header";
 import loading from "../../assets/loading.gif";
 // import { tabs, data, tabsData } from "./tabsData";
 
@@ -123,7 +124,7 @@ class AppTab extends React.Component {
 
     return (
       <div>
-        <h1>TabManager</h1>
+        <Header />
         <TabManager
           // tabsData={this.state.tabsData}
           tabs={this.state.tabs}

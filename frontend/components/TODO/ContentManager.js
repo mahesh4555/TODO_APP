@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "./sub_components/Header";
 
 import loading from "../../assets/loading.gif";
 import "./stylestab.css";
@@ -117,9 +118,22 @@ class ContentManager extends React.Component {
           </div>
           <div className="bodydown">
             <div className="tabs">{this.props.tabManagerState.tabList}</div>
-            <br /> {this.props.tabManagerState.contentList}
+
+            <div className="tasklist">
+              {" "}
+              <br /> <br />
+              {this.props.tabManagerState.contentList} <br />
+              <br />
+              <br />
+            </div>
           </div>
+
+          <br />
+          <br />
+          <br />
         </div>
+
+        <h1>Scroll to Top</h1>
       </div>
     );
   }

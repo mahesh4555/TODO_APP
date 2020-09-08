@@ -54,7 +54,7 @@ class TabManager extends React.Component {
 
   taskStatusDropDownOptionsSet = () => {
     const dropDownSelect = this.props.tabs.map((tab) => {
-      return <option value={tab.state}>{tab.label}</option>;
+      return <option value={tab.state}> {tab.label}</option>;
     });
     this.setState({
       dropDownSelect: dropDownSelect,
@@ -179,11 +179,11 @@ class TabManager extends React.Component {
     await this.props.FetchTodoTabsAndData();
     await this.taskStatusDropDownOptionsSet();
     await this.dispData(1);
-    this.setState({
-      isTodoPressed: true,
-    });
+
     setTimeout(() => {
-      this.setState({ isLoading: false });
+      this.setState({
+        isTodoPressed: true,
+      });
     }, 3000);
   }
 
