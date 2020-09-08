@@ -22,7 +22,13 @@ function ContentArea(props) {
         className="taskselectbox"
         name="state"
         //changes the select value based on active value
-        value={props.active ? props.clickedTab : props.data.currentState}
+        value={
+          props.active == "all"
+            ? props.data.currentState
+            : props.active
+            ? props.clickedTab
+            : props.data.currentState
+        }
         id={props.data._id}
         onChange={props.handleTaskStatusChange}
         style={{ width: "150px", height: "50px" }}

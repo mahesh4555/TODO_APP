@@ -25,8 +25,9 @@ class TabManager extends React.Component {
     const dropDownSelect = this.props.tabs.map((tab) => {
       console.log("tab.state:", tab.state);
       console.log("clickedTab:", clickedTab);
-
-      return <option value={tab.state}> {tab.label}</option>;
+      if (tab.state != 5) {
+        return <option value={tab.state}> {tab.label}</option>;
+      }
     });
     this.setState({
       dropDownSelect: dropDownSelect,
@@ -154,6 +155,7 @@ class TabManager extends React.Component {
 
       return (
         <TabButton
+          className="tabbutton"
           key={tab._id}
           style={style}
           tab={tab}
@@ -166,6 +168,11 @@ class TabManager extends React.Component {
     console.log("contentList");
     const contentList = this.props.data.map((data) => {
       let active = data.currentState == clickedTab ? true : false;
+      if (clickedTab == 5) {
+        //display all tasks when all button is clicked
+        active = "all";
+        console.log("ACTIVE :", active);
+      }
       console.log("activeTab :", this.state.activeTab);
       console.log("data.currentState :", data.currentState);
       console.log("clickedTab :", clickedTab);

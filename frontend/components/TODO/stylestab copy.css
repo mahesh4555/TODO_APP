@@ -8,6 +8,43 @@
   display: flex;
 }
 
+/* Change background color of buttons on hover
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+/* .tab button.active {
+  background-color: #ccc;
+} */
+*/
+
+/* Style the tab content */
+/* .tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none; */
+/* }
+
+#parent {
+  /* list-style: none; */
+  /* width: 50%; */
+  /* height: 90px;
+  margin: 0;
+  padding: 0; */
+  /* white-space: nowrap; */
+  /* overflow-x: auto;
+  overflow-y: hidden; */
+/* }
+
+#parent > li {
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  /* background-color: red; */
+/* } */ */ */
+
 .header {
   padding: 60px;
   text-align: center;
