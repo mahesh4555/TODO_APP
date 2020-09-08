@@ -17,9 +17,12 @@ function ContentArea(props) {
     >
       <b>{props.data.name}</b>
       <p>{props.data.content}</p>
+
       <select
         className="taskselectbox"
         name="state"
+        //changes the select value based on active value
+        value={props.active ? props.clickedTab : props.data.currentState}
         id={props.data._id}
         onChange={props.handleTaskStatusChange}
         style={{ width: "150px", height: "50px" }}
@@ -29,6 +32,9 @@ function ContentArea(props) {
             <option value="3">Completed</option> */}
         {props.dropDownSelect}
       </select>
+      <p style={{ fontSize: "4", fontStyle: "italic" }}>
+        Task ID :{props.data.taskId} Created On : {props.data.date}
+      </p>
     </div>
   );
 }
