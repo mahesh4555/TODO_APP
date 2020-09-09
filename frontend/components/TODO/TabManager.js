@@ -145,7 +145,7 @@ class TabManager extends React.Component {
     const tabList = this.props.tabs.map((tab) => {
       console.log("clickedTab :", clickedTab);
       console.log("tab.state :", tab.state);
-      let active = "dummy";
+      let active = tab.state == clickedTab ? true : false;
       let style = tab.state == clickedTab ? style1 : style2;
       console.log("tab.label :", tab.label);
       console.log("tab ------ active :", style);
@@ -158,6 +158,7 @@ class TabManager extends React.Component {
           className="tabbutton"
           key={tab._id}
           style={style}
+          active={active}
           tab={tab}
           handleTabChange={this.handleTabChange}
         />
@@ -180,16 +181,18 @@ class TabManager extends React.Component {
       console.log("tab_id :", data._id);
 
       console.log("active :", active);
-      return (
-        <ContentArea
-          key={data._id}
-          active={active}
-          data={data}
-          handleTaskStatusChange={this.handleTaskStatusChange}
-          dropDownSelect={this.state.dropDownSelect}
-          clickedTab={clickedTab}
-        />
-      );
+      if (active) {
+        return (
+          <ContentArea
+            key={data._id}
+            active={active}
+            data={data}
+            handleTaskStatusChange={this.handleTaskStatusChange}
+            dropDownSelect={this.state.dropDownSelect}
+            clickedTab={clickedTab}
+          />
+        );
+      }
     });
 
     this.setState({
@@ -217,7 +220,7 @@ class TabManager extends React.Component {
     // this.props.ToggleLoading(false);
     return (
       <ContentManager
-        FetchInitialState={this.FetchInitialState}
+        // FetchInitialState={this.FetchInitialState}
         handleAddTodoButtonClick={this.handleAddTodoButtonClick}
         tabManagerState={this.state}
         // Toggleloading={this.props.Toggleloading}
@@ -227,65 +230,3 @@ class TabManager extends React.Component {
 }
 
 export default TabManager;
-
-//   render() {
-//     console.log(this.state.activeTab);
-//     // console.log("Calling dispData");
-
-//     return (
-//       <div>
-//         <br />
-//         {/* <button onClick={this.FetchInitialState}>Press Me to Todo Tasks</button> */}
-
-//         <br />
-//         <br />
-
-//         <div
-//           style={{
-//             display: this.state.isTodoPressed ? "block" : "none",
-//           }}
-//         >
-//           <label>
-//             <label htmlFor="taskname">Task name </label>
-//             <input type="text" id="new_task_header" name="new_task_header" />
-
-//             <br style={{ lineHeight: "10" }} />
-//             <label htmlFor="taskcontent">Description </label>
-//             <input type="text" id="new_task_text" name="new_task_text" />
-//             <br />
-//             <select id="new_task_state" name="new_task_state">
-//               <option value="1">Todo</option>
-//               <option value="2">Inprogress</option>
-//               <option value="3">Completed</option>
-//             </select>
-//             <br />
-
-//             <br />
-
-//             <button id="new_task" onClick={this.handleAddTodoButtonClick}>
-//               Add Todo
-//             </button>
-//             <br />
-//             <br />
-//             <br />
-
-//             {/* <input type="button" id="new_task"> */}
-//           </label>
-
-//           <div className="tabs">{this.state.tabList}</div>
-//           {this.state.contentList}
-//           <br />
-//           <br />
-//           <br />
-//         </div>
-
-//         <br />
-//         <br />
-//         <br />
-//         <br />
-//         <br />
-//         <br />
-//       </div>
-//     );
-//   }
-// }

@@ -2,6 +2,9 @@ import React from "react";
 import TabManager from "./TabManager";
 import Header from "./sub_components/Header";
 import loading from "../../assets/loading.gif";
+import "./stylestab.css";
+
+import PopupMessage from "./sub_components/PopupMessage";
 // import { tabs, data, tabsData } from "./tabsData";
 
 // const tabs = [
@@ -123,7 +126,8 @@ class AppTab extends React.Component {
     console.log("render in AppTab");
 
     return (
-      <div>
+      // <PopupMessage />
+      <div className="overall">
         <Header />
         <TabManager
           // tabsData={this.state.tabsData}
@@ -133,9 +137,6 @@ class AppTab extends React.Component {
           AddTodoData={this.AddTodoData}
           FetchTodoData={this.FetchTodoData}
           UpdateTodoData={this.UpdateTodoData}
-
-          // tabList={tabList}
-          // contentList={contentList}
         />
       </div>
     );

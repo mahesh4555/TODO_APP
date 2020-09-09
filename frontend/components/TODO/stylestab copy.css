@@ -7,7 +7,7 @@
   /* flex: 1; */
   display: flex;
 }
-
+/* 
 /* Change background color of buttons on hover
 .tab button:hover {
   background-color: #ddd;
@@ -43,7 +43,11 @@
   width: 50%;
   height: 100%;
   /* background-color: red; */
-/* } */ */ */
+/* } */ */ */ */
+
+
+
+
 
 .header {
   padding: 60px;

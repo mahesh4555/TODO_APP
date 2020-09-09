@@ -5,83 +5,73 @@ import "../stylestab.css";
 import "../stylesmodal.css";
 
 const NewModal = (props) => {
-  let popup_trigger = props.data._id + "@edit_popup_trigger";
-
   return (
-    <div>
-      <Popup
-        id={props.data._id + "@edit_popup_trigger"}
-        onOpen={() =>
-          props.handleEditButton(props.data._id + "@edit_popup_trigger")
-        }
-        onClose={props.handleEditButton(props.data._id + "@edit_popup_trigger")}
-        trigger={<button className="button"> Open New Modal </button>}
-        modal
-        nested
-      >
-        {(close) => (
-          <div className="modal">
-            <button className="close" onClick={close}>
-              &times;
-            </button>
-            <div className="header"> Update Task </div>
-            <div className="content">
-              <label htmlFor="taskname">Task name </label>
-              <input
-                id={props.data._id + "@edit_task_name"}
-                type="text"
-                style={{
-                  width: "325px",
-                  height: "30px",
-                  // backgroundColor: "#d1d1d1",
-                }}
-                defaultValue="Task name"
-              />
-              <br />
-              <label htmlFor="taskcontent">Description </label>
+    <Popup
+      onOpen={props.handleSaveButton}
+      trigger={
+        <button className="button" onClick={props.handleSaveButton}>
+          {" "}
+          Open New Modal{" "}
+        </button>
+      }
+      modal
+      nested
+    >
+      {(close) => (
+        <div className="modal">
+          <div className="header"> Update Task </div>
+          <div className="content">
+            <label htmlFor="taskname">Task name </label>
+            <input
+              type="text"
+              style={{
+                width: "325px",
+                height: "30px",
+                // backgroundColor: "#d1d1d1",
+              }}
+              defaultValue="Task name"
+            />
+            <br />
+            <label htmlFor="taskcontent">Description </label>
 
-              <br />
-              <textarea
-                id={props.data._id + "@edit_task_textarea"}
-                name="txtarea"
-                style={{
-                  width: "600px",
-                  height: "100px",
-                  // backgroundColor: "#d1d1d1",
-                }}
-                defaultValue="Description"
-              ></textarea>
-            </div>
-            <div className="actions">
-              <Popup
-                trigger={<button className="button"> Trigger </button>}
-                position="top center"
-                nested
-              >
-                <span>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Beatae magni omnis delectus nemo, maxime molestiae dolorem
-                  numquam mollitia, voluptate ea, accusamus excepturi deleniti
-                  ratione sapiente! Laudantium, aperiam doloribus. Odit, aut.
-                </span>
-              </Popup>
-              <button
-                className="button"
-                onClick={() => {
-                  console.log("modal closed ");
-                  close();
-                }}
-              >
-                close modal
-              </button>
-            </div>
+            <br />
+            <textarea
+              id="new_task_textarea"
+              name="txtarea"
+              style={{
+                width: "600px",
+                height: "100px",
+                // backgroundColor: "#d1d1d1",
+              }}
+              defaultValue="Description"
+            ></textarea>
           </div>
-        )}
-      </Popup>
-      <button name="a" onClick={() => props.handleEditButton("aa")}>
-        Helllo
-      </button>
-    </div>
+          <div className="actions">
+            <Popup
+              trigger={<button className="button"> Trigger </button>}
+              position="top center"
+              nested
+            >
+              <span>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
+                magni omnis delectus nemo, maxime molestiae dolorem numquam
+                mollitia, voluptate ea, accusamus excepturi deleniti ratione
+                sapiente! Laudantium, aperiam doloribus. Odit, aut.
+              </span>
+            </Popup>
+            <button
+              className="button"
+              onClick={() => {
+                console.log("modal closed ");
+                close();
+              }}
+            >
+              close modal
+            </button>
+          </div>
+        </div>
+      )}
+    </Popup>
   );
 };
 
@@ -91,46 +81,14 @@ class ContentArea extends React.Component {
     this.state = {};
   }
 
-  handleEditButton = (id) => {
+  handleEditButton = () => {
     console.log("handleEditButton");
-    console.log("id:", id);
-
-    var id = id.split("@");
-    let task_name_id = id[0] + "@task_name";
-    let task_textarea_id = id[0] + "@task_description";
-
-    console.log("task_name:", task_name_id);
-    console.log("task_textarea:", task_textarea_id);
-
-    let task_name = document.getElementById(task_name_id);
-    let task_textarea = document.getElementById(task_textarea_id);
-
-    console.log("task_name :", task_name);
-    console.log("textarea :", task_textarea);
-
-    var edit_task_name_id = id[0] + "@edit_task_name";
-    var edit_task_textarea_id = id[0] + "@edit_task_textarea";
-    console.log("edit_task_name :", edit_task_name_id);
-    console.log("edit_task_textarea :", edit_task_textarea_id);
-
-    let edit_task_name = document.getElementById(edit_task_name_id);
-    let edit_task_textarea = document.getElementById(edit_task_textarea_id);
-
-    console.log("edit_task_name :", edit_task_name);
-    console.log("edit_task_textarea :", edit_task_textarea);
-
-    //set the values for popup
-    // document.getElementById(edit_task_name_id).value = task_name;
-    // document.getElementById(edit_task_textarea_id).value = task_textarea;
   };
 
-  handleSaveButton = (id) => {
+  handleSaveButton = () => {
     console.log("handleSaveButton is pressed");
     console.log("handleSaveButton is pressed1");
     console.log("handleSaveButton is pressed2");
-    // const { id } = event.target;
-    // console.log("name:", name);
-    console.log("id:", id);
   };
 
   render() {
@@ -199,10 +157,8 @@ class ContentArea extends React.Component {
           key={this.props.data._id}
           id={this.props.data._id}
         >
-          <b id={this.props.data._id + "@task_name"}>{this.props.data.name}</b>
-          <p id={this.props.data._id + "@task_description"}>
-            {this.props.data.content}
-          </p>
+          <b>{this.props.data.name}</b>
+          <p>{this.props.data.content}</p>
 
           <select
             className="taskselectbox"
@@ -238,10 +194,7 @@ class ContentArea extends React.Component {
             Edit
           </button>
 
-          <NewModal
-            handleEditButton={this.handleEditButton}
-            data={this.props.data}
-          />
+          <NewModal handleSaveButton={this.handleSaveButton} />
         </div>
       );
     }
